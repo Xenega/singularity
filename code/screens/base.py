@@ -55,6 +55,7 @@ class BuildDialog(dialog.ChoiceDescriptionDialog):
         for item in item_list:
             if item.item_type == self.type and item.available() \
                     and item.is_buildable(self.parent.base.location):
+                    and self.parent.base.max_item_buildable(item) > 0
                 self.list.append(item.name)
                 self.key_list.append(item)
 
@@ -102,14 +103,11 @@ class MultipleBuildDialog(BuildDialog):
     def on_change(self, description_pane, item):
         super(MultipleBuildDialog, self).on_change(description_pane, item)
 
-        item_max = self.parent.base.max_item_buildable(item)
+        item_max = self.parent.base.max_item_buildable(item) - 1
 
         self.slider.slider_size = item_max // 10 + 1
         self.slider.slider_max = item_max
-
         self.slider.slider_pos = 0
-        if (item_max > 0)
-            self.slider.slider_pos = 1
 
 
 class ItemPane(widget.BorderedWidget):
@@ -278,7 +276,7 @@ class BaseScreen(dialog.Dialog):
             
             count = 1
             if (type == "cpu"):
-                count = build_dialog.slider.slider_pos
+                count += build_dialog.slider.slider_pos
             
             self.set_current(type, item_type, count)
             self.needs_rebuild = True
