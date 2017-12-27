@@ -973,6 +973,9 @@ def load_items():
         # they're there.
         check_required_fields(item_name, ("id", "cost"), "Item")
 
+        # Get the item size
+        item_size = int(item_name.get("size", 1))
+
         # Make sure the cost is in a valid format.
         cost_list = item_name["cost"]
         if type(cost_list) != list or len(cost_list) != 3:
@@ -1009,7 +1012,7 @@ def load_items():
         else:
             build_list = []
 
-        items[item_name["id"]]=item.ItemClass( item_name["id"], "",
+        items[item_name["id"]]=item.ItemClass( item_name["id"], "", item_size,
          item_cost, item_pre, item_type, item_second, build_list)
 
     load_item_defs()

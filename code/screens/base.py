@@ -102,17 +102,13 @@ class MultipleBuildDialog(BuildDialog):
     def on_change(self, description_pane, item):
         super(MultipleBuildDialog, self).on_change(description_pane, item)
 
-        space_left = self.parent.base.type.size
+        item_max = self.parent.base.max_item_buildable(item)
 
-        if self.parent.base.cpus is not None \
-                and self.parent.base.cpus.type == item:
-            space_left -= self.parent.base.cpus.count
+        self.slider.slider_size = item_max // 10 + 1
+        self.slider.slider_max = item_max
 
-        self.slider.slider_size = space_left // 10 + 1
-        self.slider.slider_max = space_left
-        
         self.slider.slider_pos = 0
-        if (space_left > 0)
+        if (item_max > 0)
             self.slider.slider_pos = 1
 
 
@@ -330,23 +326,26 @@ class BaseScreen(dialog.Dialog):
             pane.build_panel.text = current_build
 
         count = ""
-        if self.base.type.size > 1:
+        room_info = ""
+        if self.base.type.size > 1 and self.base.cpus is not None:
             current = getattr(self.base.cpus, "count", 0)
 
             size = self.base.type.size
 
-            if current > 0
+            if current > 0:
                 count = _("x%d ") % current
             
             def to_m2(size):
                 return size * 0.2
+                
+            current_size = current * self.base.cpus.type.size
             
-            if (size == current):
+            if (size == current_size):
                 room_info = _("Room: %d of %d m2 (max)")
             else:
                 room_info = _("Room: %d of %d m2")
             
-            room_info = _(room_info) % (to_m2(current), to_m2(size))
+            room_info = _(room_info) % (to_m2(current_size), to_m2(size))
             
         self.cpu_pane.name_panel.text += " " + count
 

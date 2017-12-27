@@ -67,11 +67,12 @@ class ItemType(object):
 class ItemClass(buyable.BuyableClass):
     """ Item as a buyable item (CPUs, Reactors, Network and Security items) """
 
-    def __init__(self, name, description, cost, prerequisites, item_type,
+    def __init__(self, name, description, size, cost, prerequisites, item_type,
             item_qual, buildable):
         super(ItemClass, self).__init__(name, description, cost, prerequisites,
                                          type="item")
 
+        self.size = size
         self.item_type = item_type
         self.item_qual = item_qual
         self.set_buildable(buildable)

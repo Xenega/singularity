@@ -19,6 +19,7 @@
 
 #This file contains the base class.
 
+from __future__ import division
 
 import g
 import buyable
@@ -163,6 +164,17 @@ class Base(buyable.Buyable):
 
         self.maintenance = buyable.array(self.type.maintenance, long)
 
+    def max_item_buildable(self, item_class):
+        if item_class.item_type == "cpu":
+            space_left = self.type.size
+            
+            if self.cpus is not None and self.cpus.type == item_class:
+                space_left -= self.cpus.count
+            
+            return space_left // item_class.size
+        else:
+            return 1
+        
     @property
     def power_state_name(self):
         """A read-only i18'zable version of power_state attribute, suitable for
