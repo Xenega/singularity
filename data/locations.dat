@@ -1,20 +1,26 @@
 [N AMERICA]
 position_list = 25 | 28
+zone = urban
 
 [S AMERICA]
 position_list = 33 | 61
+zone = urban
 
 [EUROPE]
 position_list = 55 | 21
+zone = urban
 
 [ASIA]
 position_list = 77 | 28
+zone = urban
 
 [AFRICA]
 position_list = 55 | 46
+zone = urban
 
 [AUSTRALIA]
 position_list = 85 | 64
+zone = urban
 
 [ANTARCTIC]
 position_list = 50 | 91

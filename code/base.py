@@ -42,14 +42,12 @@ class BaseClass(buyable.BuyableClass):
                                          type="base")
         self.size = size
         self.force_cpu = force_cpu
-        self.regions = regions
-        if self.regions == ["pop"]:
-            self.regions = ["N AMERICA", "S AMERICA", "EUROPE", "ASIA",
-            "AFRICA", "AUSTRALIA"]
 
         self.detect_chance = detect_chance
         self.maintenance = maintenance
         self.flavor = []
+        
+        self.set_buildable(regions)
 
     def calc_discovery_chance(self, accurate = True, extra_factor = 1):
         # Get the default settings for this base type.

@@ -98,6 +98,7 @@ data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","data"))
 messages = {}
 strings = {}
 locations = {}
+zone_lists = {}
 techs = {}
 events = {}
 items = {}
@@ -818,6 +819,16 @@ def load_locations():
                 modifiers_dict[key] = location.penalty_levels[key]
             else:
                 modifiers_dict[key] = float(value)
+
+        # Make zone list (currently urban only)
+        zone_list = location_info.get("zone", [])
+        if type(zone_list) != list:
+            zone_list = [zone_list]
+            
+        for zone in zone_list:
+            if not zone_lists.has_key(zone):
+                zone_lists[zone] = []
+            zone_lists[zone].append(id)
 
         locations[id] = location.Location(id, position, absolute, safety, pre)
 

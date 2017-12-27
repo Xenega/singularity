@@ -213,8 +213,7 @@ class NewBaseDialog(dialog.ChoiceDescriptionDialog):
         base_type_list.sort()
         base_type_list.reverse()
         for base_type in base_type_list:
-            if base_type.available() \
-                    and self.parent.location.id in base_type.regions:
+            if base_type.available() and base_type.is_buildable(self.parent.location):
                 self.list.append(base_type.name)
                 self.key_list.append(base_type)
 

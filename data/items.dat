@@ -58,7 +58,7 @@ build = all
 cost_list = 5000 | 0 | 5
 pre = Solar Collectors
 type_list = reactor | 1000
-build_list = N AMERICA | S AMERICA | EUROPE | ASIA | AFRICA | ANTARCTIC | MOON | AUSTRALIA | FAR REACHES
+build_list = urban | ANTARCTIC | MOON | FAR REACHES
 
 [Fusion Reactor]
 cost_list = 10000 | 0 | 5
@@ -70,26 +70,26 @@ build = all
 cost_list = 500 | 0 | 1
 pre = Sociology
 type_list = security | 500
-build = pop
+build = urban
 
 [Perimeter Fencing]
 cost_list = 5000 | 0 | 5
 pre = Autonomous Vehicles
 type_list = security | 2500
-build = pop
+build = urban
 
 [Armed Guards]
 cost_list = 10000 | 0 | 5
 pre = Simulacra
 type_list = security | 4000
-build = pop
+build = urban
 maint = 300 | 0 | 0
 
 [Hypnosis Field]
 cost_list = 20000 | 0 | 3
 pre = Hypnosis Field
 type_list = security | 5000
-build = pop
+build = urban
 
 [Heatsink]
 cost_list = 15000 | 0 | 5
@@ -106,7 +106,7 @@ build_list = ANTARCTIC | OCEAN | MOON
 [High Speed Internet Access]
 cost_list = 200 | 0 | 1
 type_list = network | 100
-build = pop
+build = urban
 
 [Facility Interconnection Switch]
 cost_list = 10000 | 0 | 3
@@ -118,7 +118,7 @@ build = all
 cost_list = 50000 | 0 | 15
 pre = Internet Traffic Manipulation
 type_list = network | 500
-build = pop
+build = urban
 
 [Quantum Entanglement Module]
 cost_list = 75000 | 0 | 20

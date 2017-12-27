@@ -84,6 +84,25 @@ class BuyableClass(object):
         # didn't meet any of the OR prerequisites.
         return not or_mode
 
+    def set_buildable(self, buildable):
+        self.build_everywhere = False
+        
+        if "all" in buildable:
+            self.build_everywhere = True
+        
+        for zone in g.zone_lists:
+            if zone in buildable:
+                buildable.remove(zone)
+                buildable.extend(g.zone_lists[zone])
+        
+        self.buildable = buildable
+        
+    def is_buildable(self, location):
+        if self.build_everywhere or location.id in self.buildable:
+            return True
+        return False
+
+
 for stat in ("count", "complete_count", "total_count",
              "total_complete_count"):
     # Ugly syntax, but it seems to be the Right Way to do it.
