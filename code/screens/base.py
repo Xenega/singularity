@@ -335,28 +335,37 @@ class BaseScreen(dialog.Dialog):
 
             size = self.base.type.size
 
-            if size == current:
-                count = _("x%d (max)") % current
-            elif current == 0:
-                count = _("(room for %d)") % size
+            if current > 0
+                count = _("x%d ") % current
+            
+            def to_m2(size):
+                return size * 0.2
+            
+            if (size == current):
+                room_info = _("Room: %d of %d m2 (max)")
             else:
-                #Translators: current and maximum number of CPUs in a base
-                count = _("x{CURRENT:d} (max {SIZE:d})",
-                          CURRENT=current, SIZE=size)
-
+                room_info = _("Room: %d of %d m2")
+            
+            room_info = _(room_info) % (to_m2(current), to_m2(size))
+            
         self.cpu_pane.name_panel.text += " " + count
+
+        base_info = ""
 
         # Detection chance display.  If Socioanalytics hasn't been researched,
         # you get nothing; if it has, but not Advanced Socioanalytics, you get
         # an inaccurate value.
         if not g.techs["Socioanalytics"].done:
-            self.detect_frame.text = g.strings["detect_chance_unknown_base"]
+            base_info += g.strings["detect_chance_unknown_base"]
         else:
             accurate = g.techs["Advanced Socioanalytics"].done
             chance = self.base.get_detect_chance(accurate)
             def get_chance(group):
                 return g.to_percent(chance.get(group, 0))
-            self.detect_frame.text = discovery_template % \
+            base_info += discovery_template % \
                 (get_chance("news"), get_chance("science"),
                  get_chance("covert"), get_chance("public"))
+                 
+        self.detect_frame.text = base_info + "\n" + room_info
+        
         super(BaseScreen, self).rebuild()
